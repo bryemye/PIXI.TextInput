@@ -1,6 +1,4 @@
-(function (pkg){
-
-const PIXI = pkg.PIXI
+import * as PIXI from 'pixi.js';
 
 class TextInput extends PIXI.Container{
 	constructor(styles){
@@ -50,7 +48,7 @@ class TextInput extends PIXI.Container{
 	}
 
 	set substituteText(substitute){
-		if(this._substituted==substitute) 
+		if(this._substituted==substitute)
 			return
 
 		this._substituted = substitute
@@ -139,7 +137,7 @@ class TextInput extends PIXI.Container{
 			this._setDOMInputVisible(true)
 
 		this._dom_input.focus()
-		
+
 	}
 
 	blur(){
@@ -178,7 +176,7 @@ class TextInput extends PIXI.Container{
 			this._dom_input = document.createElement('input')
 			this._dom_input.type = 'text'
 		}
-		
+
 		for(let key in this._input_style){
 			this._dom_input.style[key] = this._input_style[key]
 		}
@@ -288,7 +286,7 @@ class TextInput extends PIXI.Container{
 		if(this._needsNewBoxCache())
 			this._buildBoxCache()
 
-		if(this.state==this._previous.state 
+		if(this.state==this._previous.state
 			&& this._box==this._box_cache[this.state])
 			return
 
@@ -402,7 +400,7 @@ class TextInput extends PIXI.Container{
 			case 'center':
 				this._surrogate.x = input_bounds.width * 0.5 - this._surrogate.width * 0.5
 				break
-				
+
 			case 'right':
 				this._surrogate.x = input_bounds.width - padding[1] - this._surrogate.width
 				break
@@ -681,15 +679,4 @@ function DefaultBoxGenerator(styles){
 		return box
 	}
 }
-
-pkg.exportTo[0][pkg.exportTo[1]] = TextInput
-
-})(
-	typeof PIXI === 'object'
-	? { PIXI: PIXI, exportTo: [PIXI,'TextInput'] }
-	: (
-		typeof module === 'object'
-		? { PIXI: require('pixi.js'), exportTo: [module,'exports'] }
-		: console.warn('[PIXI.TextInput] could not attach to PIXI namespace. Make sure to include this plugin after pixi.js') || {}
-	)
-)
+export{TextInput};
